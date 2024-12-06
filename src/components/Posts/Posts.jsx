@@ -31,7 +31,7 @@ export default function Posts() {
 			{posts && (
 				<section>
 					{isLoading && (
-						<div className='list--skeleton'>
+						<div className='list'>
 							{[...Array(12)].map((_, index) => (
 								<ContentLoader
 									key={index}
