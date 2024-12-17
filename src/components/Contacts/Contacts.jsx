@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Contacts({ phone, email }) {
 	return (
-		<div>
+		<div className='max-sm:hidden'>
 			<a className='mr-1' href='#'>
 				Call Us {phone}
 			</a>{' '}

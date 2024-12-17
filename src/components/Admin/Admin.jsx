@@ -3,8 +3,8 @@ import React from 'react';
 export default function Admin() {
 	return (
 		<div className='flex gap-x-5'>
-			<button>Login</button>
-			<button className='bg-slate-950 text-white px-4 py-1'>
+			<button className='max-sm:hidden'>Login</button>
+			<button className='bg-slate-950 text-white px-4 py-1 hidden'>
 				Get 1 year for $50 USD
 			</button>
 			<div className='flex items-center gap-x-2'>
