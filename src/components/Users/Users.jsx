@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { images } from '../../images.js';
 import '../../index.css';
+// import { useDispatch, useSelector } from 'react-redux';
+import { users } from '../../store/fetchUsers.jsx';
 
 export default function Users({ index, id }) {
-	const [users, setUsers] = useState([]);
+	// const [users, setUsers] = useState([]);
 
-	async function getUsers() {
-		const urlUsers = 'https://jsonplaceholder.typicode.com/users';
+	// async function getUsers() {
+	// 	const urlUsers = 'https://jsonplaceholder.typicode.com/users';
 
-		try {
-			const response = await fetch(urlUsers);
-			const data = await response.json();
-			setUsers(data);
-		} catch (error) {
-			console.error(error);
-		}
-	}
+	// 	try {
+	// 		const response = await fetch(urlUsers);
+	// 		const data = await response.json();
+	// 		setUsers(data);
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// }
 
-	useEffect(() => {
-		getUsers();
-	}, []);
+	// useEffect(() => {
+	// 	getUsers();
+	// }, []);
 
 	const getUserById = userId => {
 		return users.find(user => user.id === userId);
