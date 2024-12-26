@@ -1,33 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { images } from '../../images.js';
+import { useFetchUsers } from '../../store/useFetchUsers.js';
 import '../../index.css';
-// import { useDispatch, useSelector } from 'react-redux';
-import { users } from '../../store/fetchUsers.jsx';
 
-export default function Users({ index, id }) {
-	// const [users, setUsers] = useState([]);
+export default function Users({ postIndex }) {
+	const users = useFetchUsers();
 
-	// async function getUsers() {
-	// 	const urlUsers = 'https://jsonplaceholder.typicode.com/users';
+	const userIndex = postIndex % users.length;
 
-	// 	try {
-	// 		const response = await fetch(urlUsers);
-	// 		const data = await response.json();
-	// 		setUsers(data);
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// }
-
-	// useEffect(() => {
-	// 	getUsers();
-	// }, []);
-
-	const getUserById = userId => {
-		return users.find(user => user.id === userId);
-	};
-
-	const user = getUserById(id);
+	const user = users[userIndex];
 
 	return (
 		<>
@@ -35,7 +16,7 @@ export default function Users({ index, id }) {
 				<div className='flex items-center gap-x-3 mt-2 md:mt-auto'>
 					<img
 						className='max-w-14 rounded-2xl'
-						src={images[index % images.length].url}
+						src={images[postIndex % images.length].url}
 						alt=''
 					/>
 					<div>

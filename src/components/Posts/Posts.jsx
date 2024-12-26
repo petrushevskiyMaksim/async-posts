@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ContentLoader from 'react-content-loader';
 import Users from '../Users/Users';
+import Button from '../Button/Button';
 import '../../index.css';
 
 export default function Posts() {
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [rangePosts, setRangePosts] = useState(12);
 
 	async function getPosts() {
 		const urlPosts = 'https://jsonplaceholder.typicode.com/posts';
@@ -15,7 +17,7 @@ export default function Posts() {
 			const response = await fetch(urlPosts);
 			const data = await response.json();
 			setIsLoading(false);
-			const sliceArr = data.slice(0, 12);
+			const sliceArr = data.slice(0, rangePosts);
 			setPosts(sliceArr);
 		} catch (error) {
 			console.error(error);
@@ -24,7 +26,7 @@ export default function Posts() {
 
 	useEffect(() => {
 		getPosts();
-	}, []);
+	}, [rangePosts]);
 
 	return (
 		<div>
@@ -70,11 +72,21 @@ export default function Posts() {
 												{post.title}
 											</h2>
 											<p className='first-letter:uppercase'>{post.body}</p>
-											<Users index={index} id={post.id} />
+											<Users postIndex={index} />
 										</li>
 									);
 								})}
 							</ul>
+							{posts.length >= 100 ? (
+								<p className='flex justify-center items-center mx-auto w-48 mt-5 px-2 py-1 text-lg hover:font-medium bg-zinc-400 rounded hover:bg-zinc-500'>
+									THE END
+								</p>
+							) : (
+								<Button
+									onClick={() => setRangePosts(rangePosts + 12)}
+									text={'Показать еще'}
+								/>
+							)}
 						</div>
 					)}
 				</section>
