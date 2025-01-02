@@ -1,36 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ContentLoader from 'react-content-loader';
 import Users from '../Users/Users';
 import Button from '../Button/Button';
+import { useFetchUsers } from '../../store/users/useFetchUsers.js';
+import { useFetchPosts } from '../../store/posts/useFetchPosts.js';
 import '../../index.css';
 
-export default function Posts() {
-	const [posts, setPosts] = useState([]);
+export default function Posts({ selectedUser, users }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [rangePosts, setRangePosts] = useState(12);
 
-	async function getPosts() {
-		const urlPosts = 'https://jsonplaceholder.typicode.com/posts';
+	const posts = useFetchPosts(rangePosts, setIsLoading);
 
-		try {
-			setIsLoading(true);
-			const response = await fetch(urlPosts);
-			const data = await response.json();
-			setIsLoading(false);
-			const sliceArr = data.slice(0, rangePosts);
-			setPosts(sliceArr);
-		} catch (error) {
-			console.error(error);
-		}
-	}
+	const filteredPosts = selectedUser
+		? posts.filter(post => {
+				console.log(post.id);
+				console.log(selectedUser);
+				post.id === selectedUser;
+		  })
+		: posts;
 
-	useEffect(() => {
-		getPosts();
-	}, [rangePosts]);
-
+	console.log(filteredPosts);
+	
 	return (
 		<div>
-			{posts && (
+			{filteredPosts && (
 				<section>
 					{isLoading && (
 						<div className='md:flex flex-wrap justify-between gap-x-5 gap-y-5'>
@@ -62,7 +56,7 @@ export default function Posts() {
 					{!isLoading && (
 						<div>
 							<ul className='md:flex flex-wrap justify-between gap-x-5 gap-y-5'>
-								{posts.map((post, index) => {
+								{filteredPosts.map((post, index) => {
 									return (
 										<li
 											key={post.id}
@@ -72,13 +66,13 @@ export default function Posts() {
 												{post.title}
 											</h2>
 											<p className='first-letter:uppercase'>{post.body}</p>
-											<Users postIndex={index} />
+											<Users users={users} postIndex={index} />
 										</li>
 									);
 								})}
 							</ul>
-							{posts.length >= 100 ? (
-								<p className='flex justify-center items-center mx-auto w-48 mt-5 px-2 py-1 text-lg hover:font-medium bg-zinc-400 rounded hover:bg-zinc-500'>
+							{filteredPosts.length >= 100 ? (
+								<p className='flex justify-center items-center mx-auto w-48 mt-5 px-2 py-1 text-lg cursor-pointer hover:font-medium bg-zinc-400 rounded hover:bg-zinc-500'>
 									THE END
 								</p>
 							) : (

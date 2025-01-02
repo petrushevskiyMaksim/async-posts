@@ -4,7 +4,7 @@ export function useFetchUsers() {
 	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
-		async function fetchFn() {
+		async function fetchUsers() {
 			const urlUsers = 'https://jsonplaceholder.typicode.com/users';
 
 			try {
@@ -15,7 +15,7 @@ export function useFetchUsers() {
 				console.error('Failed to fetch users:', error);
 			}
 		}
-		fetchFn();
+		fetchUsers();
 	}, []);
 
 	return users;

@@ -1,11 +1,8 @@
 import React from 'react';
 import { images } from '../../images.js';
-import { useFetchUsers } from '../../store/useFetchUsers.js';
 import '../../index.css';
 
-export default function Users({ postIndex }) {
-	const users = useFetchUsers();
-
+export default function Users({ postIndex, users }) {
 	const userIndex = postIndex % users.length;
 
 	const user = users[userIndex];
