@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Posts from '../Posts/Posts';
-import Select from '../Select/Select';
-import { useFetchUsers } from '../../store/users/useFetchUsers';
+import { Posts } from '@components/Posts/index.js';
+import { Select } from '@components/Select/index.js';
+import { useFetchUsers } from '@store/users/useFetchUsers';
 
 export default function Main({ title }) {
 	const [selectedUser, setSelectedUser] = useState(null);

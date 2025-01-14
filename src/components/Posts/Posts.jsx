@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ContentLoader from 'react-content-loader';
-import Users from '../Users/Users';
-import Button from '../Button/Button';
-import { useFetchUsers } from '../../store/users/useFetchUsers.js';
-import { useFetchPosts } from '../../store/posts/useFetchPosts.js';
-import '../../index.css';
+import { Users } from '@components/Users/index.js';
+import { Button } from '@components/Button/index.js';
+import { useFetchPosts } from '@store/posts/useFetchPosts.js';
+import '@/index.css';
 
 export default function Posts({ selectedUser, users }) {
 	const [isLoading, setIsLoading] = useState(false);
@@ -14,22 +13,19 @@ export default function Posts({ selectedUser, users }) {
 
 	const filteredPosts = selectedUser
 		? posts.filter(post => {
-				console.log(post.id);
-				console.log(selectedUser);
-				post.id === selectedUser;
+				return post.userId === selectedUser;
 		  })
 		: posts;
 
-	console.log(filteredPosts);
-	
 	return (
 		<div>
 			{filteredPosts && (
 				<section>
 					{isLoading && (
-						<div className='md:flex flex-wrap justify-between gap-x-5 gap-y-5'>
+						<div className='md:flex flex-wrap  gap-x-5 gap-y-5'>
 							{[...Array(12)].map((_, index) => (
 								<ContentLoader
+									className='md:flex md:flex-col md:gap-4 md:w-[calc(50%-20px)] lg:w-[calc(25%-20px)] mb-6'
 									key={index}
 									speed={2}
 									width={250}
@@ -55,7 +51,7 @@ export default function Posts({ selectedUser, users }) {
 
 					{!isLoading && (
 						<div>
-							<ul className='md:flex flex-wrap justify-between gap-x-5 gap-y-5'>
+							<ul className='md:flex flex-wrap  gap-x-5 gap-y-5'>
 								{filteredPosts.map((post, index) => {
 									return (
 										<li
@@ -66,7 +62,7 @@ export default function Posts({ selectedUser, users }) {
 												{post.title}
 											</h2>
 											<p className='first-letter:uppercase'>{post.body}</p>
-											<Users users={users} postIndex={index} />
+											<Users users={users} postIndex={post.id} />
 										</li>
 									);
 								})}

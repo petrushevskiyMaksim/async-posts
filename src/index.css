@@ -10,19 +10,4 @@ body {
 	.height {
 		height: 2.5px;
 	}
-
-	/* .list {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		row-gap: 20px;
-		column-gap: 20px;
-	} */
-
-	/* .list__item {
-		display: flex;
-		flex-direction: column;
-		gap: 15px;
-		width: calc(25% - 20px);
-	} */
 }

@@ -6,7 +6,7 @@ export default function Select({ users, onChange }) {
 			<option value='All Users'>All Users</option>
 			{users.map(user => (
 				<option key={user.id} value={user.id}>
-					{user.name}
+					{user.id}
 				</option>
 			))}
 		</select>

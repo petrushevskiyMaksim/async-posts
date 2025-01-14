@@ -1,7 +1,7 @@
 import React from 'react';
-import Logo from '../Logo/Logo';
-import Contacts from '../Contacts/Contacts';
-import Admin from '../Admin/Admin';
+import { Logo } from '@components/Logo/index.js';
+import { Contacts } from '@components/Contacts/index.js';
+import { Admin } from '@components/Admin/index.js';
 
 export default function Header() {
 	return (
