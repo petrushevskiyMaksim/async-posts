@@ -3,9 +3,7 @@ import { images } from '../../images.js';
 import '../../index.css';
 
 export default function Users({ postIndex, users }) {
-	const userIndex = postIndex % users.length;
-
-	const user = users[userIndex];
+	const user = users[postIndex - 1];
 
 	return (
 		<>

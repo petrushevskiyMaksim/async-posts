@@ -19,7 +19,7 @@ export default function Main({ title }) {
 				</h1>
 				<Select users={users} onChange={handleUserChange} />
 			</div>
-			<Posts users={users} selectedUser={Number(selectedUser)} />
+			<Posts users={users} selectedUser={selectedUser} />
 		</main>
 	);
 }

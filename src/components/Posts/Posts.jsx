@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import ContentLoader from 'react-content-loader';
-import { Users } from '@components/Users/index.js';
-import { Button } from '@components/Button/index.js';
-import { useFetchPosts } from '@store/posts/useFetchPosts.js';
+import { Users } from '@components/Users';
+import { Button } from '@components/Button';
+import { useFetchPosts } from '@store/posts/useFetchPosts';
 import '@/index.css';
 
 export default function Posts({ selectedUser, users }) {
 	const [isLoading, setIsLoading] = useState(false);
-	const [rangePosts, setRangePosts] = useState(100);
+	const [rangePosts, setRangePosts] = useState(12);
+
+	// console.log(selectedUser);
 
 	const posts = useFetchPosts(rangePosts, setIsLoading);
 
@@ -17,6 +19,14 @@ export default function Posts({ selectedUser, users }) {
 		  })
 		: posts;
 
+	// console.log(posts);
+	// console.log(filteredPosts);
+	// const sliceArr = filteredPosts.slice(0, rangePosts);
+
+	const checked = selectedUser === null ? posts.length : filteredPosts.length;
+	// console.log(checked);
+	const checkPostsLength = posts.length >= checked;
+	const checkFilteredPostsLength = filteredPosts.length >= checked;
 	return (
 		<div>
 			{filteredPosts && (
@@ -67,7 +77,7 @@ export default function Posts({ selectedUser, users }) {
 									);
 								})}
 							</ul>
-							{filteredPosts.length >= 100 ? (
+							{checkPostsLength || checkFilteredPostsLength ? (
 								<p className='flex justify-center items-center mx-auto w-48 mt-5 px-2 py-1 text-lg cursor-pointer hover:font-medium bg-zinc-400 rounded hover:bg-zinc-500'>
 									THE END
 								</p>
