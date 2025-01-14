@@ -8,8 +8,9 @@ export default function Main({ title }) {
 	const users = useFetchUsers();
 
 	function handleUserChange(event) {
-		setSelectedUser(event.target.value);
+		setSelectedUser(Number(event.target.value));
 	}
+
 	return (
 		<main className='mb-5'>
 			<div className='flex items-center justify-between w-full mb-4 sm:mb-8 md:mb-12'>

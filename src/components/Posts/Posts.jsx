@@ -7,7 +7,7 @@ import '@/index.css';
 
 export default function Posts({ selectedUser, users }) {
 	const [isLoading, setIsLoading] = useState(false);
-	const [rangePosts, setRangePosts] = useState(12);
+	const [rangePosts, setRangePosts] = useState(100);
 
 	const posts = useFetchPosts(rangePosts, setIsLoading);
 
@@ -52,7 +52,7 @@ export default function Posts({ selectedUser, users }) {
 					{!isLoading && (
 						<div>
 							<ul className='md:flex flex-wrap  gap-x-5 gap-y-5'>
-								{filteredPosts.map((post, index) => {
+								{filteredPosts.map(post => {
 									return (
 										<li
 											key={post.id}
@@ -62,7 +62,7 @@ export default function Posts({ selectedUser, users }) {
 												{post.title}
 											</h2>
 											<p className='first-letter:uppercase'>{post.body}</p>
-											<Users users={users} postIndex={post.id} />
+											<Users users={users} postIndex={post.userId} />
 										</li>
 									);
 								})}
