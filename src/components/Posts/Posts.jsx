@@ -1,32 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ContentLoader from 'react-content-loader';
 import { Users } from '@components/Users';
 import { Button } from '@components/Button';
-import { useFetchPosts } from '@store/posts/useFetchPosts';
+
 import '@/index.css';
 
-export default function Posts({ selectedUser, users }) {
-	const [isLoading, setIsLoading] = useState(false);
-	const [rangePosts, setRangePosts] = useState(12);
+export default function Posts({ isLoading, posts, selectedUser, users }) {
+	const [rangePosts, setRangePosts] = useState(8);
+	const [filteredPosts, setFilteredPosts] = useState([]);
 
-	// console.log(selectedUser);
+	useEffect(() => {
+		const filterPosts =
+			selectedUser === 'all'
+				? posts
+				: posts.filter(post => {
+						return post.userId.toString() === selectedUser;
+				  });
+		setFilteredPosts(filterPosts);
+		setRangePosts(8);
+	}, [selectedUser, posts]);
 
-	const posts = useFetchPosts(rangePosts, setIsLoading);
-
-	const filteredPosts = selectedUser
-		? posts.filter(post => {
-				return post.userId === selectedUser;
-		  })
-		: posts;
-
-	// console.log(posts);
-	// console.log(filteredPosts);
-	// const sliceArr = filteredPosts.slice(0, rangePosts);
-
-	const checked = selectedUser === null ? posts.length : filteredPosts.length;
-	// console.log(checked);
-	const checkPostsLength = posts.length >= checked;
-	const checkFilteredPostsLength = filteredPosts.length >= checked;
 	return (
 		<div>
 			{filteredPosts && (
@@ -62,7 +55,7 @@ export default function Posts({ selectedUser, users }) {
 					{!isLoading && (
 						<div>
 							<ul className='md:flex flex-wrap  gap-x-5 gap-y-5'>
-								{filteredPosts.map(post => {
+								{filteredPosts.slice(0, rangePosts).map(post => {
 									return (
 										<li
 											key={post.id}
@@ -77,15 +70,16 @@ export default function Posts({ selectedUser, users }) {
 									);
 								})}
 							</ul>
-							{checkPostsLength || checkFilteredPostsLength ? (
+
+							{rangePosts <= filteredPosts.length ? (
+								<Button
+									onClick={() => setRangePosts(prev => prev + 8)}
+									text={'Показать еще'}
+								/>
+							) : (
 								<p className='flex justify-center items-center mx-auto w-48 mt-5 px-2 py-1 text-lg cursor-pointer hover:font-medium bg-zinc-400 rounded hover:bg-zinc-500'>
 									THE END
 								</p>
-							) : (
-								<Button
-									onClick={() => setRangePosts(rangePosts + 12)}
-									text={'Показать еще'}
-								/>
 							)}
 						</div>
 					)}

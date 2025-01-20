@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Posts } from '@components/Posts/index.js';
 import { Select } from '@components/Select/index.js';
+import { useFetchPosts } from '@store/posts/useFetchPosts';
 import { useFetchUsers } from '@store/users/useFetchUsers';
 
 export default function Main({ title }) {
-	const [selectedUser, setSelectedUser] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [selectedUser, setSelectedUser] = useState('all');
 	const users = useFetchUsers();
 
+	const posts = useFetchPosts(setIsLoading);
+
 	function handleUserChange(event) {
-		setSelectedUser(Number(event.target.value));
+		setSelectedUser(event.target.value);
 	}
 
 	return (
@@ -19,7 +23,12 @@ export default function Main({ title }) {
 				</h1>
 				<Select users={users} onChange={handleUserChange} />
 			</div>
-			<Posts users={users} selectedUser={selectedUser} />
+			<Posts
+				isLoading={isLoading}
+				posts={posts}
+				users={users}
+				selectedUser={selectedUser}
+			/>
 		</main>
 	);
 }
