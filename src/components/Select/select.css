@@ -1,0 +1,43 @@
+.wrapper-select {
+	position: relative;
+}
+
+select {
+	width: 350px;
+	padding: 8px;
+	font-weight: 500;
+	border: 1px solid #363434;
+	border-radius: 8px;
+	cursor: pointer;
+	background-color: transparent;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+select .my-option {
+	background: none;
+}
+
+.my-option {
+	font-size: 22px;
+	background-color: #693a3a;
+	color: #666;
+	outline: 1px solid #000;
+	border: 1px solid #000;
+}
+
+.my-option:hover {
+	background-color: #15c42f;
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 3%;
+	width: 20px;
+	height: 20px;
+	z-index: -1;
+	font-size: 22px;
+}
