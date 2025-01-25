@@ -14,7 +14,7 @@ export default function Posts({ isLoading, posts, selectedUser, users }) {
 			selectedUser === 'all'
 				? posts
 				: posts.filter(post => {
-						return post.userId.toString() === selectedUser;
+						return post.userId === selectedUser;
 				  });
 		setFilteredPosts(filterPosts);
 		setRangePosts(8);

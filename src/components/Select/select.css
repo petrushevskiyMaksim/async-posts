@@ -1,43 +1,61 @@
 .wrapper-select {
-	position: relative;
+  position: relative;
+  width: 350px;
+  z-index: 100;
 }
 
-select {
-	width: 350px;
-	padding: 8px;
-	font-weight: 500;
-	border: 1px solid #363434;
-	border-radius: 8px;
-	cursor: pointer;
-	background-color: transparent;
-	appearance: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+.custom-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-select .my-option {
-	background: none;
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 4px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px;
 }
 
-.my-option {
-	font-size: 22px;
-	background-color: #693a3a;
-	color: #666;
-	outline: 1px solid #000;
-	border: 1px solid #000;
+.option {
+  padding-bottom: 8px;
+  cursor: pointer;
 }
 
-.my-option:hover {
-	background-color: #15c42f;
+.option:last-child {
+  padding-bottom: 0px;
+  cursor: pointer;
+}
+
+.option-content {
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.option-content:hover {
+  background: #e0f2fe;
+}
+
+.selected .option-content {
+  background: #e0f2fe;
+  color: #0369a1;
 }
 
 .icon {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 3%;
-	width: 20px;
-	height: 20px;
-	z-index: -1;
-	font-size: 22px;
+  width: 20px;
+  height: 20px;
 }

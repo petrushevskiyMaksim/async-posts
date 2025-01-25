@@ -7,12 +7,13 @@ import { useFetchUsers } from '@store/users/useFetchUsers';
 export default function Main({ title }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [selectedUser, setSelectedUser] = useState('all');
+
 	const users = useFetchUsers();
 
 	const posts = useFetchPosts(setIsLoading);
 
-	function handleUserChange(event) {
-		setSelectedUser(event.target.value);
+	function handleUserChange(value) {
+		setSelectedUser(value);
 	}
 
 	return (
